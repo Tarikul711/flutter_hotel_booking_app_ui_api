@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutterhotelbookingapp/common/components/Section.dart';
+import 'package:flutterhotelbookingapp/common/components/circular_progress.dart';
 import 'package:flutterhotelbookingapp/model/destination.dart';
+import 'package:flutterhotelbookingapp/utils/Urls.dart';
 import 'package:flutterhotelbookingapp/utils/constants.dart';
+import 'package:http/http.dart';
 
 class PopularDestination extends StatefulWidget {
   @override
@@ -17,8 +22,8 @@ class _PopularDestinationState extends State<PopularDestination> {
           children: <Widget>[
             Image.asset(
               "assets/images/icons/ic_popular.png",
-              width: 24,
-              height: 24,
+              width: 20,
+              height: 20,
             ),
             SizedBox(
               width: 10,
@@ -36,38 +41,10 @@ class _PopularDestinationState extends State<PopularDestination> {
 }
 
 class DestinationList extends StatelessWidget {
-  final List<Destination> destinations = [
-    Destination(
-      image: "assets/images/popular_destination/cox_bazar.jpg",
-      title: 'Cox Bazar',
-      slug: '5 min',
-    ),
-    Destination(
-      image: "assets/images/popular_destination/sylet.jpg",
-      title: 'Sylhet',
-      slug: '10 min',
-    ),
-    Destination(
-      image: "assets/images/popular_destination/saint_martin.jpg",
-      title: 'Saint Martin',
-      slug: '25 min',
-    ),
-    Destination(
-      image: "assets/images/popular_destination/sundarban.jpg",
-      title: 'Sundarban',
-      slug: '5 min',
-    ),
-    Destination(
-      image: "assets/images/popular_destination/london.jpg",
-      title: 'London',
-      slug: '25 min',
-    ),
-  
-  ];
-
-  List<Widget> generateList(BuildContext context) {
+  List<Widget> generateList(BuildContext context, AsyncSnapshot snapshot) {
     List<Widget> list = [];
     int count = 0;
+    List<Destination> destinations = snapshot.data;
     destinations.forEach((destination) {
       Widget element = Container(
         margin: EdgeInsets.only(right: 0.0),
@@ -86,8 +63,22 @@ class DestinationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Section(
-      horizontalList: this.generateList(context),
+    return FutureBuilder(
+      future: getDestinationList(),
+      builder: (context, AsyncSnapshot snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return CircularProgress();
+          default:
+            if (snapshot.hasError)
+              return Text('Error: ${snapshot.error}');
+            else
+              return Section(
+                horizontalList: this.generateList(context, snapshot),
+              );
+        }
+      },
     );
   }
 }
@@ -104,32 +95,81 @@ class PopularDestinationCard extends StatefulWidget {
 class _PopularDestinationCardState extends State<PopularDestinationCard> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     double localWidth = size.width * 0.75;
     return Container(
-        margin: EdgeInsets.only(right: 20),
+        margin: EdgeInsets.only(right: 15),
         padding: EdgeInsets.all(20),
-        width: 220,
-        height: 180,
+        width: 160,
+        height: 140,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
-            image: AssetImage(widget.destination.image),
+            image: NetworkImage(widget.destination.image),
             fit: BoxFit.fill,
           ),
         ),
-        child: Container(
-          child: Align(
+        child: Padding(
+          padding: EdgeInsets.only(top: 55),
+          child: Container(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              child: Text(
-                widget.destination.title,
-                style: kTitleTextStyle,
-              ),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  color: Colors.black87.withOpacity(0.12),
+                  child: Text(
+                    widget.destination.name,
+                    style: kTitleTextStyle.copyWith(
+                      fontSize: 18,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(3.0, 3.0),
+                          blurRadius: 30.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Colors.black87.withOpacity(0.12),
+                  child: Text(
+                    "${widget.destination.hotelCount} Hotels",
+                    style: kTitleTextStyle.copyWith(
+                      fontSize: 14,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(3.0, 3.0),
+                          blurRadius: 30.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ));
+  }
+}
+
+List<Destination> categories;
+
+Future<List<Destination>> getDestinationList() async {
+  if (categories == null) {
+    Response response;
+    response = await get(Urls.POPULAR_DESTINATION);
+    int statusCode = response.statusCode;
+    final body = json.decode(response.body);
+    if (statusCode == 200) {
+      categories = (body as List).map((i) => Destination.fromJson(i)).toList();
+
+      return categories;
+    } else {
+      return categories = List();
+    }
+  } else {
+    return categories;
   }
 }

@@ -12,18 +12,18 @@ const kSearchIconColor = Color(0xFF505dfd);
 
 // My Text Styles
 const kHeadingextStyle = TextStyle(
-  fontSize: 24,
+  fontSize: 20,
   color: kTextColor,
   fontWeight: FontWeight.w700,
 );
 const kSubheadingextStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 15,
   fontFamily: 'PlayfairDisplay',
   color: Color(0xFF61688B),
   height: 2,
 );
 const kHighlitedSubheadingTextStyle = TextStyle(
-  fontSize: 18,
+  fontSize: 15,
   fontFamily: 'PlayfairDisplay',
   color: Color(0xFF4651e5),
   fontWeight: FontWeight.w500,
