@@ -45,7 +45,7 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
-    - assets/images/icons/ic_search_menu.png
+    - assets/images/icons/ic_home_menu.png
     - assets/images/icons/ic_account.png
     - assets/images/icons/ic_cart.png
     - assets/images/icons/ic_home.png
@@ -55,6 +55,17 @@ flutter:
     - assets/images/icons/ic_app_icon.png
     - assets/images/icons/ic_food_express.png
     - assets/images/icons/ic_app_icon_black.png
+    - assets/images/icons/ic_favorite.png
+    - assets/images/icons/ic_search.png
+    - assets/images/icons/ic_home.png
+    - assets/images/icons/ic_notification.png
+    - assets/images/icons/user.png
+    - assets/images/icons/ic_popular.png
+    - assets/images/popular_destination/cox_bazar.jpg
+    - assets/images/popular_destination/sylet.jpg
+    - assets/images/popular_destination/london.jpg
+    - assets/images/popular_destination/saint_martin.jpg
+    - assets/images/popular_destination/sundarban.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

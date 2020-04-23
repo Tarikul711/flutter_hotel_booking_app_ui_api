@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutterhotelbookingapp/utils/constants.dart';
 
 class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 10,top: 5,right: 10,bottom: 5),
-      child: TextField(
-
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            borderSide: BorderSide(
-              width: 0,
-              color: Color(0xFFfb3132),
-              style: BorderStyle.none,
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 0),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      height: 60,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Color(0xFFF5F5F7),
+        borderRadius: BorderRadius.circular(40),
+      ),
+      child: Row(
+        children: <Widget>[
+          Image.asset("assets/images/icons/ic_search.png",color: kSearchIconColor,),
+          SizedBox(width: 16),
+          Text(
+            "Search your destination / hotel",
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFF444444),
             ),
-          ),
-          filled: true,
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color(0xFFfb3132),
-          ),
-          fillColor: Color(0xFFFAFAFA),
-          suffixIcon: Icon(Icons.sort,color: Color(0xFFfb3132),),
-          hintStyle: new TextStyle(color: Color(0xFFd0cece), fontSize: 18),
-          hintText: "What would your like to buy?",
-        ),
+          )
+        ],
       ),
     );
   }
