@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterhotelbookingapp/common/components/popular_destination.dart';
+import 'package:flutterhotelbookingapp/common/components/special_offer.dart';
 import 'package:flutterhotelbookingapp/common/widgets/appbar_widget.dart';
 import 'package:flutterhotelbookingapp/common/widgets/search_widget.dart';
 import 'package:flutterhotelbookingapp/utils/constants.dart';
@@ -32,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SearchWidget(),
             SizedBox(height: 10),
             PopularDestination(),
+            SizedBox(height: 15),
+            SpecialOfferComponent(),
             SizedBox(height: 10),
           ],
         ),

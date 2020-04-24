@@ -49,6 +49,7 @@ flutter:
     - assets/images/icons/ic_home_menu.png
     - assets/images/icons/ic_account.png
     - assets/images/icons/ic_cart.png
+    - assets/images/icons/ic_discount.png
     - assets/images/icons/ic_home.png
     - assets/images/icons/ic_delete.png
     - assets/images/icons/ic_near_by.png
@@ -62,11 +63,15 @@ flutter:
     - assets/images/icons/ic_notification.png
     - assets/images/icons/user.png
     - assets/images/icons/ic_popular.png
-    - assets/images/popular_destination/cox_bazar.jpg
-    - assets/images/popular_destination/sylet.jpg
     - assets/images/popular_destination/london.jpg
-    - assets/images/popular_destination/saint_martin.jpg
-    - assets/images/popular_destination/sundarban.jpg
+    - assets/images/deal/deal1.jpg
+    - assets/images/deal/deal2.jpg
+    - assets/images/deal/deal3.jpg
+    - assets/images/deal/deal4.jpg
+    - assets/images/deal/deal5.jpg
+    - assets/images/deal/deal6.jpg
+    - assets/images/deal/deal7.jpg
+    - assets/images/deal/deal8.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

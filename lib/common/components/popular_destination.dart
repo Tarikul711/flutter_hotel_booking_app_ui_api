@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutterhotelbookingapp/common/components/Section.dart';
 import 'package:flutterhotelbookingapp/common/components/circular_progress.dart';
@@ -121,13 +120,6 @@ class _PopularDestinationCardState extends State<PopularDestinationCard> {
                     widget.destination.name,
                     style: kTitleTextStyle.copyWith(
                       fontSize: 18,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(3.0, 3.0),
-                          blurRadius: 30.0,
-                          color: Color.fromARGB(255, 0, 0, 0),
-                        ),
-                      ],
                     ),
                   ),
                 ),

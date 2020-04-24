@@ -13,7 +13,7 @@ class Section extends StatelessWidget {
         children: <Widget>[
           SectionTitle((this.title != null ) ? this.title : ''),
           SingleChildScrollView(
-            padding: EdgeInsets.only(left: 20.0),
+            padding: EdgeInsets.only(left: 5.0),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: (this.horizontalList != null ) ? this.horizontalList : []
