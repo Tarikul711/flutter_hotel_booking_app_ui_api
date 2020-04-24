@@ -50,6 +50,7 @@ flutter:
     - assets/images/icons/ic_account.png
     - assets/images/icons/ic_cart.png
     - assets/images/icons/ic_discount.png
+    - assets/images/icons/ic_room.png
     - assets/images/icons/ic_home.png
     - assets/images/icons/ic_delete.png
     - assets/images/icons/ic_near_by.png

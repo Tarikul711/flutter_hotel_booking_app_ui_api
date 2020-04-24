@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterhotelbookingapp/common/components/hotel_list.dart';
 import 'package:flutterhotelbookingapp/common/components/popular_destination.dart';
 import 'package:flutterhotelbookingapp/common/components/special_offer.dart';
 import 'package:flutterhotelbookingapp/common/widgets/appbar_widget.dart';
@@ -15,12 +16,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(left: 20, top: 50, right: 20),
+        padding: EdgeInsets.only(left: 20, top: 35, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             appBarWidget(context),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             Text("Hi Tarikul!", style: kHeadingextStyle),
             Row(
               children: <Widget>[
@@ -35,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
             PopularDestination(),
             SizedBox(height: 15),
             SpecialOfferComponent(),
+            SizedBox(height: 15),
+            HotelListComponent(),
             SizedBox(height: 10),
           ],
         ),

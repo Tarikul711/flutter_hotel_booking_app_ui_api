@@ -25,6 +25,7 @@ class Section extends StatelessWidget {
   }
 }
 
+
 class SectionTitle extends StatelessWidget {
   final String _text;
 

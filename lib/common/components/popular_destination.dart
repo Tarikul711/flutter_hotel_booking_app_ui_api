@@ -99,8 +99,8 @@ class _PopularDestinationCardState extends State<PopularDestinationCard> {
     return Container(
         margin: EdgeInsets.only(right: 15),
         padding: EdgeInsets.all(20),
-        width: 160,
-        height: 140,
+        width: 140,
+        height: 120,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
@@ -109,7 +109,7 @@ class _PopularDestinationCardState extends State<PopularDestinationCard> {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: 55),
+          padding: EdgeInsets.only(top: 35),
           child: Container(
             alignment: Alignment.bottomCenter,
             child: Column(
@@ -146,22 +146,22 @@ class _PopularDestinationCardState extends State<PopularDestinationCard> {
   }
 }
 
-List<Destination> categories;
+List<Destination> destinations;
 
 Future<List<Destination>> getDestinationList() async {
-  if (categories == null) {
+  if (destinations == null) {
     Response response;
     response = await get(Urls.POPULAR_DESTINATION);
     int statusCode = response.statusCode;
     final body = json.decode(response.body);
     if (statusCode == 200) {
-      categories = (body as List).map((i) => Destination.fromJson(i)).toList();
+      destinations = (body as List).map((i) => Destination.fromJson(i)).toList();
 
-      return categories;
+      return destinations;
     } else {
-      return categories = List();
+      return destinations = List();
     }
   } else {
-    return categories;
+    return destinations;
   }
 }

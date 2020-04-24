@@ -108,8 +108,8 @@ class _SpecialOfferCardState extends State<SpecialOfferCard> {
     return Container(
         margin: EdgeInsets.only(right: 15),
         padding: EdgeInsets.all(0),
-        width: 280,
-        height: 170,
+        width: 250,
+        height: 145,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           image: DecorationImage(
