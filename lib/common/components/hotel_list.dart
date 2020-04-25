@@ -61,9 +61,10 @@ Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     childAspectRatio: 8.0 / 8.0,
     children: List<Widget>.generate(hotels.length, (index) {
       return GridTile(
-          child: HotelItemCard(
-        hotel: hotels[index],
-      ));
+        child: HotelItemCard(
+          hotel: hotels[index],
+        ),
+      );
     }),
   );
 }
@@ -78,28 +79,73 @@ class HotelItemCard extends StatefulWidget {
 }
 
 class _HotelItemCardState extends State<HotelItemCard> {
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        Container(
-            margin: EdgeInsets.only(right: 20, top: 15, bottom: 15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: NetworkImage(widget.hotel.thumbnail),
-                fit: BoxFit.fill,
+  Widget newAbc(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20, top: 10, bottom: 10),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15.0),
+        child: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: Image.network(
+                widget.hotel.thumbnail,
+                fit: BoxFit.cover,
               ),
             ),
-            child: Text("")),
-        Text(widget.hotel.name,style: kHotelTitleTextStyle,),
-        SizedBox(height: 5,),
-        Text(widget.hotel.location,style: kHotelSubTitleTextStyle,),
-        SizedBox(height: 5,),
-        Text("BDT ${widget.hotel.rate.toInt()}",style: kHotelPriceTextStyle,),
-      ],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 9.0, vertical: 5.0),
+                decoration: BoxDecoration(
+                  color: Colors.black87.withOpacity(0.4),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("${widget.hotel.name}",
+                        maxLines: 1,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFFFFFFFF))),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        "BDT ${widget.hotel.rate.toInt()}",
+                         style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFFFFF)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    /* return Container(
+        margin: EdgeInsets.only(right: 20, top: 15, bottom: 15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          image: DecorationImage(
+            image: NetworkImage(widget.hotel.thumbnail),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Text(""));*/
+    return newAbc(context);
   }
 }
 

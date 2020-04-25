@@ -36,9 +36,11 @@ class _MainScreenControllerState extends State<MainScreenController>
 
   @override
   Widget build(BuildContext context) {
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.black.withAlpha(50),
-        statusBarIconBrightness: Brightness.light));
+      statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark
+    ));
     final themeData = ApplicationThemeProvider.get();
     return Scaffold(
       backgroundColor: themeData.scaffoldBackgroundColor,
