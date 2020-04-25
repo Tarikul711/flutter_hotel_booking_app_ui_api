@@ -44,7 +44,10 @@ class _SpecialOfferComponentState extends State<SpecialOfferComponent> {
                 color: Color(0xFF3443fa),
                 size: 20,
               ),
-            )
+            ),
+            SizedBox(
+              width: 10,
+            ),
           ],
         ),
         SpecialOfferList()

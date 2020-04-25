@@ -29,6 +29,27 @@ const kHighlitedSubheadingTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
   height: 2,
 );
+const kHotelTitleTextStyle = TextStyle(
+  fontSize: 15,
+  fontFamily: 'PlayfairDisplay',
+  color: Color(0xFF444444),
+  fontWeight: FontWeight.w500,
+  height: 2,
+);
+const kHotelPriceTextStyle = TextStyle(
+  fontSize: 15,
+  fontFamily: 'PlayfairDisplay',
+  color: Color(0xFF444444),
+  fontWeight: FontWeight.w700,
+  height: 2,
+);
+const kHotelSubTitleTextStyle = TextStyle(
+  fontSize: 15,
+  fontFamily: 'PlayfairDisplay',
+  color: Color(0xFF9e9fa2),
+  fontWeight: FontWeight.w400,
+  height: 2,
+);
 
 const kTitleTextStyle = TextStyle(
   fontSize: 15,

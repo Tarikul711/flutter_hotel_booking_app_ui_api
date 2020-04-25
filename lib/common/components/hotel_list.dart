@@ -58,8 +58,7 @@ Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     physics: ScrollPhysics(),
     // to disable GridView's scrolling
     shrinkWrap: true,
-    padding: EdgeInsets.all(1.0),
-    /*childAspectRatio: 8.0 / 9.0,*/
+    childAspectRatio: 8.0 / 8.0,
     children: List<Widget>.generate(hotels.length, (index) {
       return GridTile(
           child: HotelItemCard(
@@ -82,38 +81,25 @@ class _HotelItemCardState extends State<HotelItemCard> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double localWidth = size.width * 0.75;
-    return Container(
-        margin: EdgeInsets.only(right: 15, top: 15, bottom: 15),
-        padding: EdgeInsets.all(20),
-        width: 140,
-        height: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(
-            image: NetworkImage(widget.hotel.thumbnail),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 35),
-          child: Container(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  color: Colors.black87.withOpacity(0.12),
-                  child: Text(
-                    widget.hotel.name,
-                    style: kTitleTextStyle.copyWith(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ],
+    return Column(
+      children: <Widget>[
+        Container(
+            margin: EdgeInsets.only(right: 20, top: 15, bottom: 15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              image: DecorationImage(
+                image: NetworkImage(widget.hotel.thumbnail),
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-        ));
+            child: Text("")),
+        Text(widget.hotel.name,style: kHotelTitleTextStyle,),
+        SizedBox(height: 5,),
+        Text(widget.hotel.location,style: kHotelSubTitleTextStyle,),
+        SizedBox(height: 5,),
+        Text("BDT ${widget.hotel.rate.toInt()}",style: kHotelPriceTextStyle,),
+      ],
+    );
   }
 }
 

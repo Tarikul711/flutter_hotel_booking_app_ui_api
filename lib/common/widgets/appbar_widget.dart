@@ -5,7 +5,7 @@ Widget appBarWidget(context) {
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
       Image.asset("assets/images/icons/ic_home_menu.png",width: 24,height: 24,color: Colors.black87,),
-      Image.asset("assets/images/icons/user.png",width: 34,height: 34,),
+      Padding(padding:EdgeInsets.only(right: 20),child: Image.asset("assets/images/icons/user.png",width: 34,height: 34,)),
     ],
   );
 }
