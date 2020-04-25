@@ -11,7 +11,39 @@ class HotelListComponent extends StatefulWidget {
   _HotelListComponentState createState() => _HotelListComponentState();
 }
 
+List<Hotel> hotels = List();
+
 class _HotelListComponentState extends State<HotelListComponent> {
+  bool isLoading = false;
+  int pageNumber = 1;
+
+  Widget requestForData(String pageNumber) {
+    print("tarikul requestForData");
+    return FutureBuilder(
+      future: getHotelList(pageNumber),
+      builder: (context, AsyncSnapshot snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return CircularProgress();
+          default:
+            if (snapshot.hasError)
+              return Text('Error: ${snapshot.error}');
+            else
+              return createListView(context, snapshot);
+        }
+      },
+    );
+  }
+
+  Future _loadData() async {
+    await new Future.delayed(new Duration(seconds: 2));
+    print("load more");
+    setState(() {
+      requestForData("2");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,21 +61,30 @@ class _HotelListComponentState extends State<HotelListComponent> {
             ),
           ],
         ),
-        FutureBuilder(
-          future: getHotelList(),
-          builder: (context, AsyncSnapshot snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return CircularProgress();
-              default:
-                if (snapshot.hasError)
-                  return Text('Error: ${snapshot.error}');
-                else
-                  return createListView(context, snapshot);
+        NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification scrollInfo) {
+            print(scrollInfo.metrics.maxScrollExtent);
+            if (!isLoading &&
+                scrollInfo.metrics.pixels ==
+                    scrollInfo.metrics.maxScrollExtent) {
+              print("tarikul pre noti");
+              _loadData();
+              // start loading data
+              setState(() {
+                print("tarikul noti");
+                isLoading = true;
+              });
             }
           },
-        )
+          child: requestForData("$pageNumber"),
+        ),
+        Container(
+          height: isLoading ? 50.0 : 0,
+          color: Colors.transparent,
+          child: Center(
+            child: new CircularProgressIndicator(),
+          ),
+        ),
       ],
     );
   }
@@ -51,8 +92,8 @@ class _HotelListComponentState extends State<HotelListComponent> {
 
 Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
   HotelModel hotelModel = snapshot.data;
-  List<Hotel> hotels = hotelModel.hotels;
-  print("Hotel Length ${hotels.length}");
+//  hotels = hotelModel.hotels;
+  hotels.addAll(hotelModel.hotels);
   return GridView.count(
     crossAxisCount: 2,
     physics: ScrollPhysics(),
@@ -79,7 +120,7 @@ class HotelItemCard extends StatefulWidget {
 }
 
 class _HotelItemCardState extends State<HotelItemCard> {
-  Widget newAbc(BuildContext context) {
+  Widget hotelItemDesign(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: 20, top: 10, bottom: 10),
       child: ClipRRect(
@@ -117,10 +158,10 @@ class _HotelItemCardState extends State<HotelItemCard> {
                       alignment: Alignment.bottomRight,
                       child: Text(
                         "BDT ${widget.hotel.rate.toInt()}",
-                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFFFFFFF)),
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFFFFFF)),
                       ),
                     ),
                   ],
@@ -135,26 +176,16 @@ class _HotelItemCardState extends State<HotelItemCard> {
 
   @override
   Widget build(BuildContext context) {
-    /* return Container(
-        margin: EdgeInsets.only(right: 20, top: 15, bottom: 15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(
-            image: NetworkImage(widget.hotel.thumbnail),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: Text(""));*/
-    return newAbc(context);
+    return hotelItemDesign(context);
   }
 }
 
 HotelModel hotelModel;
 
-Future<HotelModel> getHotelList() async {
+Future<HotelModel> getHotelList(String pageNumber) async {
   if (hotelModel == null) {
     Response response;
-    response = await get(Urls.HOTEL_SAMPLE_LIST);
+    response = await get(Urls.HOTEL_SAMPLE_LIST + pageNumber);
     int statusCode = response.statusCode;
     final body = json.decode(response.body);
     if (statusCode == 200) {
