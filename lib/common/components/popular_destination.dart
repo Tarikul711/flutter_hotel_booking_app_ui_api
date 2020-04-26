@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterhotelbookingapp/common/components/Section.dart';
 import 'package:flutterhotelbookingapp/common/components/circular_progress.dart';
 import 'package:flutterhotelbookingapp/model/destination.dart';
+import 'package:flutterhotelbookingapp/screen/place_detail_screen.dart';
 import 'package:flutterhotelbookingapp/utils/Urls.dart';
 import 'package:flutterhotelbookingapp/utils/constants.dart';
 import 'package:http/http.dart';
@@ -96,53 +97,72 @@ class _PopularDestinationCardState extends State<PopularDestinationCard> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double localWidth = size.width * 0.75;
-    return Container(
-        margin: EdgeInsets.only(right: 15),
-        padding: EdgeInsets.all(20),
-        width: 140,
-        height: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(
-            image: NetworkImage(widget.destination.image),
-            fit: BoxFit.fill,
+    return InkResponse(
+      onTap: () {
+        Navigator.of(context).push(
+          PageRouteBuilder<void>(
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return AnimatedBuilder(
+                  animation: animation,
+                  builder: (BuildContext context, Widget child) {
+                    return PlaceDetailScreen(
+                      heroTag: "${widget.destination.name}",
+                      imageAsset: "${widget.destination.image}",
+                    );
+                  });
+            },
           ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 35),
-          child: Container(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  color: Colors.black87.withOpacity(0.12),
-                  child: Text(
-                    widget.destination.name,
-                    style: kTitleTextStyle.copyWith(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.black87.withOpacity(0.12),
-                  child: Text(
-                    "${widget.destination.hotelCount} Hotels",
-                    style: kTitleTextStyle.copyWith(
-                      fontSize: 14,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(3.0, 3.0),
-                          blurRadius: 30.0,
-                          color: Color.fromARGB(255, 0, 0, 0),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+        );
+      },
+      child: Container(
+          margin: EdgeInsets.only(right: 15),
+          padding: EdgeInsets.all(20),
+          width: 140,
+          height: 120,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+              image: NetworkImage(widget.destination.image),
+              fit: BoxFit.fill,
             ),
           ),
-        ));
+          child: Padding(
+            padding: EdgeInsets.only(top: 35),
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    color: Colors.black87.withOpacity(0.12),
+                    child: Text(
+                      widget.destination.name,
+                      style: kTitleTextStyle.copyWith(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.black87.withOpacity(0.12),
+                    child: Text(
+                      "${widget.destination.hotelCount} Hotels",
+                      style: kTitleTextStyle.copyWith(
+                        fontSize: 14,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(3.0, 3.0),
+                            blurRadius: 30.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )),
+    );
   }
 }
 
@@ -155,7 +175,8 @@ Future<List<Destination>> getDestinationList() async {
     int statusCode = response.statusCode;
     final body = json.decode(response.body);
     if (statusCode == 200) {
-      destinations = (body as List).map((i) => Destination.fromJson(i)).toList();
+      destinations =
+          (body as List).map((i) => Destination.fromJson(i)).toList();
 
       return destinations;
     } else {

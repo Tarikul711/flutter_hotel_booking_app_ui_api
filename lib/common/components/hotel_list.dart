@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterhotelbookingapp/common/components/circular_progress.dart';
 import 'package:flutterhotelbookingapp/model/hotel_model.dart';
+import 'package:flutterhotelbookingapp/screen/place_detail_screen.dart';
 import 'package:flutterhotelbookingapp/utils/Urls.dart';
 import 'package:flutterhotelbookingapp/utils/constants.dart';
 import 'package:http/http.dart';
@@ -102,8 +103,13 @@ Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     childAspectRatio: 8.0 / 8.0,
     children: List<Widget>.generate(hotels.length, (index) {
       return GridTile(
-        child: HotelItemCard(
-          hotel: hotels[index],
+        child: InkResponse(
+          child: HotelItemCard(
+            hotel: hotels[index],
+          ),
+          onTap: () {
+
+          },
         ),
       );
     }),
