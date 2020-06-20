@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterhotelbookingapp/common/widgets/appbar_widget.dart';
 import 'package:flutterhotelbookingapp/screen/home_screen.dart';
+import 'package:flutterhotelbookingapp/screen/search_screen.dart';
 import 'package:flutterhotelbookingapp/utils/constants.dart';
 import 'package:flutterhotelbookingapp/utils/theme.dart';
 
@@ -15,9 +16,9 @@ class _MainScreenControllerState extends State<MainScreenController>
   TabController _controller;
   final List<Widget> tabBarScreens = [
     HomeScreen(),
-    Container(color: Colors.lightBlueAccent),
-    Container(color: Colors.lightBlue),
-    Container(color: Colors.blue),
+    SearchScreen(),
+    SearchScreen(),
+    SearchScreen(),
   ];
 
   @override
@@ -36,11 +37,9 @@ class _MainScreenControllerState extends State<MainScreenController>
 
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark
-    ));
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     final themeData = ApplicationThemeProvider.get();
     return Scaffold(
       backgroundColor: themeData.scaffoldBackgroundColor,

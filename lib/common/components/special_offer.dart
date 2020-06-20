@@ -127,13 +127,7 @@ class _SpecialOfferCardState extends State<SpecialOfferCard> {
             child: Column(
               children: <Widget>[
                 Container(
-                  color: Colors.black87.withOpacity(0.12),
-                  child: Text(
-                    widget.dealModel.id,
-                    style: kTitleTextStyle.copyWith(
-                      fontSize: 18,
-                    ),
-                  ),
+
                 ),
               ],
             ),

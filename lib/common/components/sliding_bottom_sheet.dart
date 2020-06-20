@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutterhotelbookingapp/common/components/hotel_list.dart';
 import 'package:flutterhotelbookingapp/common/components/sliding_bottom_sheet_content.dart';
 import 'package:flutterhotelbookingapp/utils/theme.dart';
 
@@ -57,13 +58,13 @@ class _SlidingBottomSheetState extends State<SlidingBottomSheet>
         double topMarginAnimatedValue =
             (1 - bottomSheetController.value) * topMargin * 2;
         final radiusAnimatedValue = Radius.circular(
-            (1 - bottomSheetController.value) * cornerRadius * 2);
+            (1 - bottomSheetController.value) * cornerRadius * 1.5);
         final double bottomSheetDragIndicatorWidth = 76;
         double bottomSheetDragIndicatorWidthUpdatedValue =
             (1 - bottomSheetController.value) *
                 (bottomSheetDragIndicatorWidth * 2);
         return Positioned(
-          height: bottomSheetController.value * fullScreen,
+          height: bottomSheetController.value * fullScreen + 150,
           bottom: 0,
           left: 0,
           right: 0,
@@ -108,7 +109,8 @@ class _SlidingBottomSheetState extends State<SlidingBottomSheet>
                         ),
                       ),
                     ),
-                    BottomSheetContent(controller: bottomSheetController)
+                    Padding(padding:EdgeInsets.only(left: 20,top: 50),child: HotelListComponent())
+//                    BottomSheetContent(controller: bottomSheetController)
                   ]),
                 ),
               ),

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutterhotelbookingapp/common/components/circular_progress.dart';
 import 'package:flutterhotelbookingapp/model/hotel_model.dart';
-import 'package:flutterhotelbookingapp/screen/place_detail_screen.dart';
 import 'package:flutterhotelbookingapp/utils/Urls.dart';
 import 'package:flutterhotelbookingapp/utils/constants.dart';
 import 'package:http/http.dart';
@@ -39,7 +38,6 @@ class _HotelListComponentState extends State<HotelListComponent> {
 
   Future _loadData() async {
     await new Future.delayed(new Duration(seconds: 2));
-    print("load more");
     setState(() {
       requestForData("2");
     });

@@ -39,6 +39,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen>
   static double bookButtonBottomOffset = -60;
   double bookButtonBottom = bookButtonBottomOffset;
   AnimationController _bottomSheetController;
+
   @override
   void initState() {
     super.initState();
@@ -88,6 +89,10 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen>
                       shape: IndicatorShape.circle(size: 8),
                       child: PageView(
                         children: <Widget>[
+                          Image.network(
+                            imageAsset,
+                            fit: BoxFit.cover,
+                          ),
                           Image.network(
                             imageAsset,
                             fit: BoxFit.cover,
@@ -143,11 +148,18 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen>
                 ),
               ),
             ),
+            Positioned(
+              top: 100,
+              left: MediaQuery.of(context).size.width / 2,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text("Hello ABC"),
+              ),
+            ),
             SlidingBottomSheet(
               controller: _bottomSheetController,
               cornerRadius: bottomSheetCornerRadius,
             ),
-            _ripple(themeData),
           ],
         ),
       ),
