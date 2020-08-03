@@ -1,4 +1,4 @@
-# flutterhotelbookingapp
+# flutter hotel booking app
 
 A new Flutter application.
 
