@@ -3,9 +3,8 @@
 **Md Tarikul Islam** [![Twitter Follow](https://img.shields.io/twitter/follow/tarikul711.svg?style=social)](https://twitter.com/tarikul711)
 A new Flutter application.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
+## Screenshots
+<img src="2020-08-23.jpg"/>
 
 ## ✨ Requirements
 * Any Operating System (ie. MacOS X, Linux, Windows)
