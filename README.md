@@ -4,6 +4,7 @@
 A new Flutter application.
 
 ## Screenshots
+
 <img src="2020-08-23.jpg" height="500em"/>
 
 ## ✨ Requirements
