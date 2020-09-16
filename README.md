@@ -6,8 +6,6 @@ A new Flutter application.
 ## Screenshots
 <img src="2020-08-23.jpg" height="500em"/>
  
- 
- 
 ## ✨ Requirements
 * Any Operating System (ie. MacOS X, Linux, Windows)
 * Any IDE with Flutter SDK installed (ie.  Android Studio, VSCode, IntelliJ, etc)
